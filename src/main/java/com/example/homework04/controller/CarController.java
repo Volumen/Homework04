@@ -1,6 +1,8 @@
 package com.example.homework04.controller;
 
 import com.example.homework04.model.Car;
+import com.example.homework04.model.Color;
+import com.example.homework04.model.Mark;
 import com.example.homework04.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,15 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/cars", produces = {
-        MediaType.APPLICATION_JSON_VALUE,
-        MediaType.APPLICATION_XML_VALUE})
+@RequestMapping(value = "/cars", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CarController {
     CarService carService;
+
 
     @Autowired
     public CarController(CarService carService) {
         this.carService = carService;
+
     }
 
     @GetMapping()
@@ -32,11 +34,11 @@ public class CarController {
     public ResponseEntity<Car> getCarById(@PathVariable long id)
     {
         Car car = carService.getCarById(id);
-        if(car != null)
-        {
+//        if(car != null)
+//        {
             return new ResponseEntity<>(car, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+       // }//
+       // return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     @GetMapping("/carColor/{color}")
     public ResponseEntity<List<Car>> getCarsByColor(@PathVariable String color)
@@ -52,10 +54,10 @@ public class CarController {
     public ResponseEntity addCar(@RequestBody Car newCar)
     {
         Boolean result = carService.addCar(newCar);
-        if(result) {
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-        return new ResponseEntity(HttpStatus.SEE_OTHER);
+      //  if(result) {
+            return new ResponseEntity<>(result, HttpStatus.CREATED);
+        //}
+        //return new ResponseEntity(HttpStatus.SEE_OTHER);
     }
     @PutMapping
     public ResponseEntity<Car> modifyCar(@RequestBody(required = false) Car modifiedCar)
@@ -81,10 +83,10 @@ public class CarController {
     public ResponseEntity deleteCar(@PathVariable Long id)
     {
         boolean result = carService.deleteCar(id);
-        if(result)
-        {
+//        if(result)
+//        {
             return new ResponseEntity( HttpStatus.OK);
-        }
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 }

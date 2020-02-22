@@ -4,8 +4,6 @@ import com.example.homework04.controller.CarController;
 import com.example.homework04.model.Car;
 import com.example.homework04.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
